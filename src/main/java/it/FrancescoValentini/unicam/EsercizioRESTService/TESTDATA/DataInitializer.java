@@ -35,8 +35,6 @@ public class DataInitializer implements CommandLineRunner {
     	repoProduttori.save(new Produttore("10", "Elisa", "Rosa"));
 
         // Inizializza i prodotti
-        Produttore p0 = repoProduttori.findById("0")
-            .orElseThrow(() -> new RuntimeException("Produttore 0 non trovato"));
         Produttore p1 = repoProduttori.findById("1")
             .orElseThrow(() -> new RuntimeException("Produttore 1 non trovato"));
         Produttore p2 = repoProduttori.findById("2")
@@ -47,7 +45,7 @@ public class DataInitializer implements CommandLineRunner {
                 .orElseThrow(() -> new RuntimeException("Produttore 1 non trovato"));
         
         // Aggiunge i prodotti
-        productRepository.save(new Product("1", "Mele", 15.0, p0));
+        productRepository.save(new Product("1", "Mele", 15.0, p1));
         productRepository.save(new Product("2", "Pere", 10.0, p2));
         productRepository.save(new Product("3", "Sale", 5.0, p5));
         productRepository.save(new Product("4", "Limoni", 28.0, p6));
@@ -56,6 +54,6 @@ public class DataInitializer implements CommandLineRunner {
         productRepository.save(new Product("7", "Olio d'Oliva", 12.5, p5));
         productRepository.save(new Product("8", "Pomodori", 8.0, p6));
         productRepository.save(new Product("9", "Vino Rosso", 25.0, p1));
-        productRepository.save(new Product("10", "Formaggio", 18.0, p0));
+        productRepository.save(new Product("10", "Formaggio", 18.0, p1));
     }
 }
