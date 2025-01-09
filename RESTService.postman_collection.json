@@ -1,0 +1,281 @@
+{
+	"info": {
+		"_postman_id": "09d917ff-c234-432d-9f13-c820d231da7d",
+		"name": "RESTService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20803249"
+	},
+	"item": [
+		{
+			"name": "PRODOTTI",
+			"item": [
+				{
+					"name": "LISTA PRODOTTI",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/prodotti",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prodotti"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODOTTO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/prodotti/4",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prodotti",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD PRODOTTO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": \"11\",\r\n  \"name\": \"Peperoncino\",\r\n  \"price\": 19.99,\r\n  \"produttore\": {\r\n    \"id\": \"1\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/prodotti",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prodotti"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE PRODOTTO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n        \"id\": \"6\",\r\n        \"name\": \"Grappa Veneta\",\r\n        \"price\": 40.55,\r\n        \"produttore\": {\r\n            \"id\": \"0\"\r\n        }\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/prodotti",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prodotti"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ELIMINA PRODOTTO",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/prodotti/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"prodotti",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "PRODUTTORI",
+			"item": [
+				{
+					"name": "LISTA PRODUTTORI",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produttori",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produttori"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODUTTORE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produttori/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produttori",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "PRODOTTI DEL PRODUTTORE",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produttori/1/prodotti",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produttori",
+								"1",
+								"prodotti"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ADD PRODUTTORE",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"11\",\r\n    \"nome\": \"Produttore11\",\r\n    \"cognome\": \"Produttore11\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produttori",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produttori"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "UPDATE PRODUTTORE",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"2\",\r\n    \"nome\": \"Produttore02\",\r\n    \"cognome\": \"Produttore02 COGNOME\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/produttori",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produttori"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "DELETE PRODUTTORE",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/produttori/10",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"produttori",
+								"10"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8080",
+			"type": "string"
+		}
+	]
+}
