@@ -59,6 +59,7 @@ public class RestProduttori {
 	@DeleteMapping(value = "/produttori/{id}")
 	public ResponseEntity<Object> deleteProduttore(@PathVariable("id") String id) {
 		if (!repoProduttori.existsById(id)) return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		if(repoProduttori.productsByProduttoreId(id).size() > 0) return new ResponseEntity<>("Eliminare prima i prodotti associati al produttore!",HttpStatus.BAD_REQUEST);
 		repoProduttori.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
