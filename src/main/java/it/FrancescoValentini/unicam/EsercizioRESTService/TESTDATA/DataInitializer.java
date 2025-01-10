@@ -23,16 +23,16 @@ public class DataInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         // Inizializza i produttori
-    	repoProduttori.save(new Produttore("1", "Mario", "Rossi"));
-    	repoProduttori.save(new Produttore("2", "Luigi", "Bianchi"));
-    	repoProduttori.save(new Produttore("3", "Giovanna", "Verdi"));
-    	repoProduttori.save(new Produttore("4", "Anna", "Neri"));
-    	repoProduttori.save(new Produttore("5", "Paolo", "Gialli"));
-    	repoProduttori.save(new Produttore("6", "Laura", "Marrone"));
-    	repoProduttori.save(new Produttore("7", "Francesco", "Blu"));
-    	repoProduttori.save(new Produttore("8", "Sara", "Arancioni"));
-    	repoProduttori.save(new Produttore("9", "Marco", "Viola"));
-    	repoProduttori.save(new Produttore("10", "Elisa", "Rosa"));
+    	repoProduttori.save(new Produttore("1", "Mario", "Rossi","1234"));
+    	repoProduttori.save(new Produttore("2", "Luigi", "Bianchi","1234"));
+    	repoProduttori.save(new Produttore("3", "Giovanna", "Verdi","1234"));
+    	repoProduttori.save(new Produttore("4", "Anna", "Neri","1234"));
+    	repoProduttori.save(new Produttore("5", "Paolo", "Gialli","1234"));
+    	repoProduttori.save(new Produttore("6", "Laura", "Marrone","1234"));
+    	repoProduttori.save(new Produttore("7", "Francesco", "Blu","1234"));
+    	repoProduttori.save(new Produttore("8", "Sara", "Arancioni","1234"));
+    	repoProduttori.save(new Produttore("9", "Marco", "Viola","1234"));
+    	repoProduttori.save(new Produttore("10", "Elisa", "Rosa","1234"));
 
         // Inizializza i prodotti
         Produttore p1 = repoProduttori.findById("1")
