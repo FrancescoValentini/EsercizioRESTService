@@ -1,15 +1,24 @@
 package it.FrancescoValentini.unicam.EsercizioRESTService.Models;
 
+import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 
 @Entity
-public class Produttore {
+public class Produttore implements UserDetails {
 	@Id
 	private String id;
 	private String nome;
@@ -23,7 +32,8 @@ public class Produttore {
 	 * Relazione Uno a molti
 	 * 
 	 */
-	@OneToMany(mappedBy = "produttore")
+    @JsonManagedReference
+	@OneToMany(mappedBy = "produttore", fetch = FetchType.EAGER)
 	private List<Product> products;
 
 	public Produttore() {
@@ -64,7 +74,7 @@ public class Produttore {
 	public String getId() {
 		return id;
 	}
-
+	@Override
 	public String getUsername() {
 		return username;
 	}
@@ -92,6 +102,10 @@ public class Produttore {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
+	@Override
+	public Collection<? extends GrantedAuthority> getAuthorities() {
+	    return Arrays.asList(new SimpleGrantedAuthority("Produttore"));	
+	}
 	
 }

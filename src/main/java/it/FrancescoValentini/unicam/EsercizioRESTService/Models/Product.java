@@ -1,5 +1,7 @@
 package it.FrancescoValentini.unicam.EsercizioRESTService.Models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
@@ -19,6 +21,7 @@ public class Product {
 	 * produttore
 	 * 
 	 */
+    @JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "produttore_id", nullable = false)
 	private Produttore produttore;
