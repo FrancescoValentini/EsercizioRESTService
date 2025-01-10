@@ -3,6 +3,7 @@ package it.FrancescoValentini.unicam.EsercizioRESTService.RESTControllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.FrancescoValentini.unicam.EsercizioRESTService.DTO.ProductDTO;
 import it.FrancescoValentini.unicam.EsercizioRESTService.Models.Product;
 import it.FrancescoValentini.unicam.EsercizioRESTService.Models.Produttore;
 import it.FrancescoValentini.unicam.EsercizioRESTService.Repositories.ProductListRepository;
@@ -46,6 +48,24 @@ public class RestProdotti {
 			if (!productRepository.existsById(product.getId())) { // Verifica che il prodotto non sia già presente
 				product.setProduttore(produttore); // Imposta il produttore del prodotto
 				productRepository.save(product); // Salva il prodotto nella repository
+				return new ResponseEntity<>(HttpStatus.CREATED);
+			} else {
+				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			}
+		}else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+	
+
+	@PostMapping(value = "/addprodotto")
+	public ResponseEntity<Object> addProduct1(
+			@RequestBody ProductDTO product,
+			@AuthenticationPrincipal Produttore produttore) {
+		
+		if(produttore != null) { // Verifica che il produttore specificato esista
+			if (!productRepository.existsById(product.getId())) { // Verifica che il prodotto non sia già presente
+				productRepository.save(new Product(product.getId(),product.getName(),product.getPrezzo(),produttore));
 				return new ResponseEntity<>(HttpStatus.CREATED);
 			} else {
 				return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
