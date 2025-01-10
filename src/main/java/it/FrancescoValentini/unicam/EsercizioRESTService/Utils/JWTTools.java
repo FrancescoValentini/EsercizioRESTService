@@ -20,9 +20,19 @@ public class JWTTools {
 		SecretKey hmacKey = Keys.hmacShaKeyFor(hmacKeyString.getBytes());
 		return Jwts.builder()
 				.setSubject(uid)
-				.setExpiration(new Date(System.currentTimeMillis() + (15 * 60 * 1000)))
+				.setExpiration(new Date(System.currentTimeMillis() + (15 * 90 * 1000)))
 				.setIssuedAt(new Date(System.currentTimeMillis()))
 				.signWith(hmacKey)
 				.compact();
+	}
+	
+	public String verifyToken(String token) {
+		SecretKey hmacKey = Keys.hmacShaKeyFor(hmacKeyString.getBytes());
+		return Jwts.parser()
+				.setSigningKey(hmacKey)
+				.build()
+				.parseClaimsJws(token)
+				.getBody()
+				.getSubject();
 	}
 }
