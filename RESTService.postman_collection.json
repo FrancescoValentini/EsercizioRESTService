@@ -266,11 +266,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/login",
+							"raw": "{{base_url}}/auth/login",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
+								"auth",
 								"login"
 							]
 						}
@@ -283,11 +284,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{base_url}}/whoami",
+							"raw": "{{base_url}}/auth/whoami",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
+								"auth",
 								"whoami"
 							]
 						}
