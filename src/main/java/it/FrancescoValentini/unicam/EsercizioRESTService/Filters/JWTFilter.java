@@ -3,9 +3,12 @@ package it.FrancescoValentini.unicam.EsercizioRESTService.Filters;
 import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import it.FrancescoValentini.unicam.EsercizioRESTService.Models.Produttore;
@@ -58,5 +61,12 @@ public class JWTFilter extends OncePerRequestFilter {
 			return;
 		}
 		
+	}
+	
+	@Bean
+	public FilterRegistrationBean registration(JWTFilter filter) {
+	    FilterRegistrationBean<JWTFilter> registrationBean = new FilterRegistrationBean<>(filter);
+	    registrationBean.setEnabled(false); // Disabilita la registrazione globale
+	    return registrationBean;
 	}
 }
