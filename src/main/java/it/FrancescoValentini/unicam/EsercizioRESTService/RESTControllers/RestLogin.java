@@ -7,6 +7,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.FrancescoValentini.unicam.EsercizioRESTService.DTO.LoginDTO;
@@ -14,7 +15,8 @@ import it.FrancescoValentini.unicam.EsercizioRESTService.Models.Produttore;
 import it.FrancescoValentini.unicam.EsercizioRESTService.Repositories.ProduttoriRepository;
 import it.FrancescoValentini.unicam.EsercizioRESTService.Utils.JWTTools;
 
-@RestController
+@RestController()
+@RequestMapping("/auth")
 public class RestLogin {
 	
 	@Autowired

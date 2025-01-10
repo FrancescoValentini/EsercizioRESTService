@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.DelegatingFilterProxy;
@@ -37,30 +38,30 @@ public class JWTFilter extends OncePerRequestFilter {
 									HttpServletResponse response, 
 									FilterChain filterChain) throws ServletException, IOException {
 		
-        if (request.getRequestURI().startsWith("/login")) { 
-            filterChain.doFilter(request, response); 
-            return;
-        }
+
 		
 		String token = request.getHeader("Authorization");
 		
-		// Verifica il JWT
-		if(token != null && token.startsWith("Bearer ")){
-			String userID = jwtTools.verifyToken(token.substring(7));
-			Produttore p = usersRepository.findById(userID).get();
-			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
-					p,
-					null,
-					p.getAuthorities()
-					);
-			SecurityContextHolder.getContext().setAuthentication(auth);
-			
-			filterChain.doFilter(request, response);
-		}else {
-			response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Token di autenticazione non presente");
-			return;
-		}
+        if (token == null || !token.startsWith("Bearer ")) { // token non presente
+            filterChain.doFilter(request, response); 
+            return;
+        }else { // token presente, lo verifica
+        	String userID = jwtTools.verifyToken(token.substring(7));
+        	Authentication authContext = SecurityContextHolder.getContext().getAuthentication();
+        	if(userID != null && authContext == null) {
+            	Produttore p = usersRepository.findById(userID).get();
+
+    			UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
+    					p,
+    					null,
+    					p.getAuthorities()
+    					);
+    			SecurityContextHolder.getContext().setAuthentication(auth);
+    			
+        	}
+        }
 		
+		filterChain.doFilter(request, response);
 	}
 	
 	@Bean

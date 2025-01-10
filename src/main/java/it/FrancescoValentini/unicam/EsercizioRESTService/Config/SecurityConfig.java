@@ -29,7 +29,12 @@ public class SecurityConfig {
 		http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 		
 		// Autorizza tutte le richieste senza autenticazione (solo per TEST) 
-		http.authorizeHttpRequests(req -> req.requestMatchers("/**").permitAll());
+		http.authorizeHttpRequests(req -> req
+				.requestMatchers("/auth/**").permitAll()
+				.requestMatchers("/h2-console/**").permitAll()
+				.requestMatchers("/**").permitAll()
+				.anyRequest().authenticated()
+				);
 		
 		return http.build();
 	}
