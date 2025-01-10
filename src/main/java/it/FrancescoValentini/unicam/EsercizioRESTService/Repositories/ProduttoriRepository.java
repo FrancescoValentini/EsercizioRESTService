@@ -1,6 +1,7 @@
 package it.FrancescoValentini.unicam.EsercizioRESTService.Repositories;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -15,4 +16,7 @@ public interface ProduttoriRepository extends CrudRepository<Produttore, String>
 
     @Query("SELECT p FROM Product p JOIN p.produttore pr WHERE pr.id = :produttoreId")
     List<Product> productsByProduttoreId(@Param("produttoreId") String produttoreId);
+    
+
+    Optional<Produttore> findByUsername(@Param("username") String username);
 }
