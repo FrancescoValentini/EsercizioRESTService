@@ -3,6 +3,7 @@ package it.FrancescoValentini.unicam.EsercizioRESTService.RESTControllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,12 +24,15 @@ public class RestLogin {
 	JWTTools jwtTools;
 	
 	@GetMapping(value = "/whoami")
-	public ResponseEntity<Object> getProduttori() {
-		return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+	
+	public ResponseEntity<Object> whoami(@AuthenticationPrincipal Produttore utente) {
+		if(utente != null) return new ResponseEntity<>(utente,HttpStatus.OK);
+		return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+		
 	}
 	
 	@PostMapping(value = "/login")
-	public ResponseEntity<Object> addProduttore(@RequestBody LoginDTO utente ) {
+	public ResponseEntity<Object> login(@RequestBody LoginDTO utente ) {
 		Produttore prod = usersRepository.findByUsername(utente.getUsername()).get();
 		
 		if(prod != null && prod.getPassword().equals(utente.getPassword())) {
